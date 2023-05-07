@@ -1,0 +1,11 @@
+.container {
+  /* position: fixed;
+  top: var(--topPadding); */
+  background-color: #eee;
+  width: 30%;
+  min-width: 320px;
+  height: 100%;
+  padding: 10px 20px;
+  text-overflow: ellipsis;
+  overflow-y: auto;
+}
