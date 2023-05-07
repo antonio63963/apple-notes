@@ -6,13 +6,15 @@ import styles from "./Input.module.css";
 interface TInput {
   value: string;
   setValue: (data: string) => void;
+  onLeaveEmpty: () => void;
 }
 
-const Input: FC<TInput> = ({ value, setValue }) => {
+const Input: FC<TInput> = ({ value, setValue, onLeaveEmpty }) => {
   return (
     <div className={cn(styles.container)}>
       <input
         autoFocus
+        onBlur={onLeaveEmpty}
         value={value}
         className={cn(styles.input)}
         type="text"
