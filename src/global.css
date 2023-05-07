@@ -1,9 +1,11 @@
 :root {
   --light-gray: #FAFAFA;
   --gray: #e0e0e0;
-  --deep-gray: #9e9e9e;
+  --deep-gray: #8a8989;
   --black: #212121;
   --topPadding: 52px;
+
+  --radius: 10px;
 }
 
 * {

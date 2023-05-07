@@ -1,0 +1,23 @@
+.container {
+  display: flex;
+  align-items: center;
+  background-color: var(--light-gray);
+  border-radius: 10px;
+  padding-right: 8px;
+}
+.input {
+  padding: 8px;
+  /* background-color: var(--light-gray); */
+  border: none;
+  border-radius: 10px;
+}
+.input:focus {
+  outline: 0;
+  outline-offset: 0;
+  /* border: 1px solid var(--deep-gray); */
+}
+.iconContainer {
+  width: 24px;
+  display: flex;
+  align-items: center;
+}

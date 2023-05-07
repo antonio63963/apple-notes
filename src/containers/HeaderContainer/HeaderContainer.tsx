@@ -1,8 +1,11 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import cn from 'classnames';
 import styles from "./Header.module.css";
+import SearchBox from "../SearchBox/SearchBox";
+
 
 const Header: FC = () => {
+
   return (
     <header className={cn(styles.header, 'shadow')}>
       <div className={cn('appWidthContent', styles.content)}>
@@ -12,7 +15,7 @@ const Header: FC = () => {
           <button>Update</button>
         </div>
         <div className={cn(styles.inputContainer)}>
-          <input />
+          <SearchBox />
         </div>
       </div>
     </header>
