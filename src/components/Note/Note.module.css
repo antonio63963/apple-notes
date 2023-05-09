@@ -1,0 +1,29 @@
+.container {
+  padding: 16px 16px 0 16px;
+  cursor: pointer;
+}
+.selected {
+  background-color: var(--gray);
+}
+.content {
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--gray);
+}
+.cropText {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.title {
+}
+.subtitle {
+  max-width: 100%;
+  display: flex;
+  margin-top: 10px;
+}
+.time {
+  white-space: nowrap;
+}
+.description {
+  margin-left: 16px;
+}
