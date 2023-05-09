@@ -27,7 +27,7 @@ const Note: FC<INote> = ({
       <div className={cn(styles.content)}>
         <h3 className={cn(styles.titlej, styles.cropText)}>{title}</h3>
         <div className={cn(styles.subtitle)}>
-          <span className={cn(styles.time)}>{time} PM</span>
+          <span className={cn(styles.time)}>{time}</span>
           <span className={cn(styles.description, styles.cropText)}>
             {description}
           </span>

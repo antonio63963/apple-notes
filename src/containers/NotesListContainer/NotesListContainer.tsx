@@ -1,5 +1,6 @@
 import { FC, useCallback, useState, useEffect } from "react";
 import { Note } from "../../components";
+import { getFormatedTime } from "../../utils/date";
 
 interface INote {
   id: string;
@@ -37,7 +38,7 @@ const mock: INote[] = [
 
 const NotesListContainer: FC = () => {
   const [notes, setNotes] = useState<INote[]>(mock);
-  
+
   const onNoteSelect = useCallback((id: string) => {
     setNotes((currentData) =>
       currentData.map((note) => {
@@ -55,11 +56,12 @@ const NotesListContainer: FC = () => {
   return (
     <>
       {notes.map((note) => {
+        const time = getFormatedTime(note.date);
         return (
           <Note
             key={note.id}
             title={note.title}
-            time={note.date.toString()}
+            time={time}
             description={note.description}
             isSelected={note.isSelected}
             onClick={() => onNoteSelect(note.id)}
