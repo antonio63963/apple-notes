@@ -35,9 +35,11 @@ class LocacDB {
         const db = event.target?.result;
         resolve({
           deleteDB: this.deleteDB,
-          deleteStorage: () => this.deleteStorage(db),
           add: (note: INote) => this.add(db, note),
           put: (note: INote, id: string) => this.put(db, note, id),
+          delete: (id: string) => this.delete(db, id),
+          clearDB: () => this.clearDB(db),
+          getAll: () => this.getAll(db),
         });
       };
       openRequest.onerror = () => {
@@ -46,21 +48,19 @@ class LocacDB {
     });
   }
 
-  deleteStorage(db: IDBDatabase) {
-    console.log(db);
-    db?.deleteObjectStore("notes");
-  }
   deleteDB() {
     const deleteRequest = indexedDB.deleteDatabase("appDB");
     deleteRequest.onsuccess = function () {
       console.log("DB has been deleted... ", deleteRequest.result);
     };
+    deleteRequest.onerror = function () {
+      console.log("Delete Error...", deleteRequest.error);
+    };
   }
 
   add(db: IDBDatabase, note: INote) {
-    const tx = db?.transaction(["notes"], "readwrite");
-    if (!tx) return false;
-    const notes = tx.objectStore("notes");
+    const notes = db?.transaction("notes", "readwrite").objectStore("notes");
+
     const request = notes.add(note);
     request.onsuccess = function () {
       console.log("Note was added in store...", request.result);
@@ -68,29 +68,51 @@ class LocacDB {
     request.onerror = function () {
       console.log("Error", request.error, "---", request);
     };
-    tx.oncomplete = function () {
-      console.log("All added to ", notes);
-    };
   }
   put(db: IDBDatabase, updatedNote: INote, id: string) {
     const notes = db?.transaction("notes", "readwrite").objectStore("notes");
     const idRequest = notes.get(id);
-console.log(idRequest)
+
     idRequest.onsuccess = () => {
       const data = Object.assign(idRequest.result, updatedNote);
-      const updatedNoteRequest = notes.put(data)
+      const updatedNoteRequest = notes.put(data);
 
-      console.log(`The transaction that this req is ${updatedNoteRequest.transaction}`)
-    }
+      updatedNoteRequest.onsuccess = () => {
+        console.log("UPDATED!!!");
+      };
+      updatedNoteRequest.onerror = () => {
+        console.log("Update Error... ", updatedNoteRequest.error);
+      };
+    };
+  }
+  delete(db: IDBDatabase, id: string) {
+    const notes = db?.transaction("notes", "readwrite").objectStore("notes");
+    const idRequest = notes.get(id);
 
-    
-    // const request = notes.put(updatedNote);
-    // request.onsuccess = function () {
-    //   console.log("Note was added in store...", request.result);
-    // };
-    // request.onerror = function () {
-    //   console.log("Error", request.error, "---", request);
-    // };
+    idRequest.onsuccess = () => {
+      const deletedNoteRequest = notes.delete(id);
+
+      deletedNoteRequest.onsuccess = () => {
+        console.log("DELETED!!!");
+      };
+      deletedNoteRequest.onerror = () => {
+        console.log("Delete Error...", deletedNoteRequest.error);
+      };
+    };
+  }
+  clearDB(db: IDBDatabase) {
+    const notes = db?.transaction("notes", "readwrite").objectStore("notes");
+    const clearStorage = notes.clear();
+    clearStorage.onsuccess = () => {
+      console.log("DB has been cleared...", clearStorage.result);
+    };
+  }
+  getAll(db: IDBDatabase) {
+    const notes = db?.transaction("notes", "readwrite").objectStore("notes");
+    const getAllRequest = notes.getAll();
+    getAllRequest.onsuccess = () => {
+      console.log("Got all items...", getAllRequest.result);
+    };
   }
 }
 
