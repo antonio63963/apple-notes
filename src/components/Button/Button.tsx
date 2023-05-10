@@ -6,11 +6,16 @@ import styles from "./Button.module.css";
 interface IButton {
   children: ReactNode;
   onClick: () => void;
+  isDisabled?: boolean;
 }
 
-const IconButton: FC<IButton> = ({ children, onClick }) => {
+const IconButton: FC<IButton> = ({ children, onClick, isDisabled = false }) => {
   return (
-    <button onClick={onClick} className={cn(styles.button)}>
+    <button
+      disabled={isDisabled}
+      onClick={onClick}
+      className={cn(styles.button, isDisabled ? styles.disabled : null)}
+    >
       {children}
     </button>
   );

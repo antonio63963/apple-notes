@@ -15,3 +15,7 @@ margin-left: 16px;
 .button:hover {
   background-color: var(--gray);
 }
+
+.disabled {
+  opacity: .5;
+}
