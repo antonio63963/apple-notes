@@ -10,18 +10,20 @@ interface IModal {
   children: ReactNode;
 }
 
-const Modal: FC<IModal> = ({title, onClose, children}) => {
-  return <div className={cn(styles.bg)}>
-    <div className={cn(styles.container)}>
-      <div className={cn(styles.titleRow)}>
-        <h2 className={cn(styles.title)}>{title}</h2>
-        <div onClick={onClose}>
-          <IoClose size={24} />
+const Modal: FC<IModal> = ({ title, onClose, children }) => {
+  return (
+    <div className={cn(styles.bg)}>
+      <div className={cn(styles.container)}>
+        <div className={cn(styles.titleRow)}>
+          <h2 className={cn(styles.title)}>{title}</h2>
+          <div className={cn(styles.closeButton)} onClick={onClose}>
+            <IoClose size={24} />
+          </div>
         </div>
+        {children}
       </div>
-      {children}
     </div>
-  </div>;
+  );
 };
 
 export default Modal;

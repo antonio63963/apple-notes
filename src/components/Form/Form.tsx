@@ -19,6 +19,8 @@ interface IForm {
   onSubmit: () => void;
   titleValue: string;
   descriptionValue: string;
+  onDescriptionChange: (data: string) => void;
+  onTitleChange: (data: string) => void;
 }
 
 const Form: FC<IForm> = ({
@@ -26,28 +28,40 @@ const Form: FC<IForm> = ({
   onSubmit,
   titleValue,
   descriptionValue,
+  onDescriptionChange,
+  onTitleChange,
 }) => {
   return (
     <div className={cn(styles.bg)}>
       <Modal onClose={onClose} title="Create new note">
-        <label>Title</label>
-        <input value={titleValue} className={cn(styles.input)} name="title" />
-        <label>Description</label>
-        <textarea
-          value={descriptionValue}
-          rows={5}
-          className={cn(styles.input)}
-          name="description"
-        />
-
-        <div className={cn(styles.bottonsRow)}>
-          <Button onClick={onClose}>
-            <IoClose size={24} />
-          </Button>
-          <Button onClick={onSubmit}>
-            <IoSave size={24} />
-          </Button>
-        </div>
+       <form>
+         <label>Title</label>
+         <input
+           required
+           onChange={(e) => onTitleChange(e.target.value)}
+           value={titleValue}
+           className={cn(styles.input)}
+           name="title"
+         />
+         <label>Description</label>
+         <textarea
+           required
+           value={descriptionValue}
+           rows={5}
+           className={cn(styles.input)}
+           name="description"
+           onChange={(e) => onDescriptionChange(e.target.value)}
+         />
+        
+         <div className={cn(styles.bottonsRow)}>
+           <Button onClick={onClose}>
+             <IoClose size={24} />
+           </Button>
+           <Button onClick={onSubmit}>
+             <IoSave size={24} />
+           </Button>
+         </div>
+       </form>
       </Modal>
     </div>
   );

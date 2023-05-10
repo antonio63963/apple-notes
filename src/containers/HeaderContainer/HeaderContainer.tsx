@@ -1,18 +1,49 @@
-import { FC, useState } from "react";
-import cn from "classnames";
-import styles from "./Header.module.css";
+import { FC, useCallback, useState, useContext } from "react";
 import SearchBox from "../SearchBox/SearchBox";
-import { ButtonsGroup } from "../../components";
+import { Header, Form, ButtonsGroup } from "../../components";
 
-const Header: FC = () => {
+const HeaderContainer: FC = () => {
+  const [titleInput, setTitleInput] = useState<string>("");
+  const [descriptionInput, setDescriptionInput] = useState<string>("");
+  const [isForm, setIsForm] = useState<boolean>(false);
+
+  
+
+  const onClose = useCallback(() => {
+    setIsForm(false);
+  }, []);
+
+  const onSubmit = useCallback(() => {}, []);
+
+  const onAddNote = useCallback(() => {
+    setIsForm(true)
+  }, []);
+  const onUpdateNote = useCallback(() => {
+    console.log("Update BUTTON");
+  }, []);
+  const onDeleteNote = useCallback(() => {
+    console.log("Delete BUTTON");
+  }, []);
   return (
-    <header className={cn(styles.header, "shadow")}>
-      <div className={cn("appWidthContent", styles.content)}>
-        <ButtonsGroup />
-        <SearchBox />
-      </div>
-    </header>
+    <Header>
+      {isForm && (
+        <Form
+          titleValue={titleInput}
+          descriptionValue={descriptionInput}
+          onTitleChange={setTitleInput}
+          onDescriptionChange={setDescriptionInput}
+          onClose={onClose}
+          onSubmit={onSubmit}
+        />
+      )}
+      <ButtonsGroup
+        onAddNote={onAddNote}
+        onDeleteNote={onDeleteNote}
+        onUpdateNote={onUpdateNote}
+      />
+      <SearchBox />
+    </Header>
   );
 };
 
-export default Header;
+export default HeaderContainer;
