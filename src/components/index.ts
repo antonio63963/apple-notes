@@ -5,3 +5,5 @@ export { default as Input } from "./Input/Input";
 export { default as SearchButton } from "./SearchButton/SearchButton";
 export { default as Button } from "./Button/Button";
 export { default as ButtonsGroup } from "./OnNoteButtonsGroup/OnNoteButtonsGroup";
+export { default as Form } from "./Form/Form";
+export { default as Modal } from "./Modal/Modal";
