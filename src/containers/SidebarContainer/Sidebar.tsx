@@ -21,7 +21,7 @@ const Sidebar: FC = () => {
         }
       })
     );
-  }, []);
+  }, [setSelectedNote, setNotes]);
 
   return (
     <>

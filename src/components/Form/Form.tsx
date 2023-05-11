@@ -43,6 +43,7 @@ const Form: FC<IForm> = ({
         <div>
           <label>Title</label>
           <input
+            autoFocus
             required
             onChange={(e) => onTitleChange(e.target.value)}
             value={titleValue}

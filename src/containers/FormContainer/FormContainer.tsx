@@ -68,7 +68,7 @@ const FormContainer: FC<IForm> = ({ close, selectedNote }) => {
     if (selectedNote && localDB && localDB.put) {
       const noteWithNewTitle = { ...selectedNote, title };
       try {
-        const { data } = await localDB.put(noteWithNewTitle, selectedNote.id);
+        const { data } = await localDB.put({ ...selectedNote, title, isSelected: false }, selectedNote.id);
         if (data) {
           setSelectedNote(noteWithNewTitle);
           setNotes((currentData) => {
