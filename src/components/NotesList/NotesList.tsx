@@ -24,7 +24,8 @@ const NotesList: FC<INotesList> = ({ notes, onNoteSelect, isOpen }) => {
   return (
     <aside className={cn(styles.container)}>
       <div className={cn(styles.list, isOpen ? styles.mobileSidebar : null)}>
-        {notes.map((note) => {
+       <div className={cn(styles.listInnerContainer)}>
+       {notes.map((note) => {
           const time = getFormatedTime(note.date);
           return (
             <Note
@@ -37,6 +38,7 @@ const NotesList: FC<INotesList> = ({ notes, onNoteSelect, isOpen }) => {
             />
           );
         })}
+       </div>
       </div>
     </aside>
   );

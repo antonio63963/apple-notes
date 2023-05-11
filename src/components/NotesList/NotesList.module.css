@@ -1,13 +1,18 @@
 .container {
   height: 100%;
-  border-right: 1px solid var(--gray);
   border-left: 1px solid var(--gray);
 }
 .list {
   width: 320px;
   height: 100%;
   overflow-y: auto;
+  padding-right: 5px;
   transition: all 0.5s ease-in-out;
+}
+.listInnerContainer {
+  height: 100%;
+  border-right: 1px solid var(--gray);
+
 }
 .list::-webkit-scrollbar {
   background: var(--light-gray);
@@ -17,7 +22,7 @@
   background: var(--light-gray);
 }
 .list::-webkit-scrollbar-thumb {
-  background-color: var(--gray);
+  background-color: var(--deep-gray);
   border-radius: 10px;
 }
 
@@ -28,5 +33,6 @@
 @media screen and (max-width: 850px) {
   .list {
     width: 0;
+    padding: 0;
   }
 }

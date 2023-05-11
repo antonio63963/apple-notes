@@ -58,13 +58,13 @@ const HeaderContainer: FC = () => {
         <MobileHeader
           onMenu={onMenu}
           isOpen={isSidebarOpen}
-          isSelectedNote={!selectedNote}
+          isSelectedNote={!!selectedNote}
           onAddNote={onAddNote}
           onDeleteNote={onDeleteNote}
           onUpdateNote={onUpdateNote}
         />
         <DesktopHeader
-          isSelectedNote={!selectedNote}
+          isSelectedNote={!!selectedNote}
           onAddNote={onAddNote}
           onDeleteNote={onDeleteNote}
           onUpdateNote={onUpdateNote}

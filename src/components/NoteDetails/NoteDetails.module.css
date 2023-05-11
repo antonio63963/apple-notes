@@ -5,6 +5,8 @@
   padding: 20px 30px;
   width: 100%;
   border-right: 1px solid var(--gray);
+  border-left: 1px solid var(--gray);
+  margin-left: 5px;
 }
 .dateWrapper {
   width: 100%;
@@ -28,4 +30,6 @@
   border-right: 1px solid var(--gray);
   white-space: nowrap;
   padding: 20px;
+  border-left: 1px solid var(--gray);
+  margin-left: 5px;
 }
