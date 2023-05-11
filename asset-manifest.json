@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/apple-notes/static/css/main.645160e0.css",
+    "main.js": "/apple-notes/static/js/main.339a3f0f.js",
+    "static/js/787.ddb65d9b.chunk.js": "/apple-notes/static/js/787.ddb65d9b.chunk.js",
+    "index.html": "/apple-notes/index.html",
+    "main.645160e0.css.map": "/apple-notes/static/css/main.645160e0.css.map",
+    "main.339a3f0f.js.map": "/apple-notes/static/js/main.339a3f0f.js.map",
+    "787.ddb65d9b.chunk.js.map": "/apple-notes/static/js/787.ddb65d9b.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.645160e0.css",
+    "static/js/main.339a3f0f.js"
+  ]
+}
