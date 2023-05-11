@@ -9,4 +9,25 @@ function getFormatedTime(date: Date) {
   }:${formatedMinutes} ${morning}`;
 }
 
-export { getFormatedTime };
+function getMmDdYy(date: Date) {
+  const monthNames = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+  const month = monthNames[date.getMonth()];
+  const day = new Date().getDate();
+  const year = new Date().getFullYear();
+  return `${month} ${day}, ${year}`;
+}
+
+export { getFormatedTime, getMmDdYy };
