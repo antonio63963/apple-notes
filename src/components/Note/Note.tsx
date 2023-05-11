@@ -18,7 +18,6 @@ const Note: FC<INote> = ({
   onClick,
   isSelected,
 }) => {
-  console.log(isSelected)
   return (
     <div
       className={cn(styles.container, isSelected && styles.selected)}

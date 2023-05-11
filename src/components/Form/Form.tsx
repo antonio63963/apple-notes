@@ -14,27 +14,33 @@ interface INote {
   date: Date;
 }
 
+type FormType = 'create' | 'update';
+
 interface IForm {
+  formTitle: string;
   onClose: () => void;
-  onSubmit: () => void;
+  onSave: () => void;
   titleValue: string;
   descriptionValue: string;
   onDescriptionChange: (data: string) => void;
   onTitleChange: (data: string) => void;
+  // type: FormType;
 }
+
 
 const Form: FC<IForm> = ({
   onClose,
-  onSubmit,
+  onSave,
   titleValue,
   descriptionValue,
   onDescriptionChange,
   onTitleChange,
+  formTitle
 }) => {
   return (
     <div className={cn(styles.bg)}>
-      <Modal onClose={onClose} title="Create new note">
-       <form>
+      <Modal onClose={onClose} title={formTitle}>
+       <div>
          <label>Title</label>
          <input
            required
@@ -57,11 +63,11 @@ const Form: FC<IForm> = ({
            <Button onClick={onClose}>
              <IoClose size={24} />
            </Button>
-           <Button onClick={onSubmit}>
+           <Button onClick={onSave}>
              <IoSave size={24} />
            </Button>
          </div>
-       </form>
+       </div>
       </Modal>
     </div>
   );

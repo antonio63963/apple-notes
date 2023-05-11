@@ -1,13 +1,32 @@
-import { FC } from "react";
-import cn from 'classnames';
+import { FC, useCallback, useContext } from "react";
 
-import styles from './Sidebar.module.css';
-import NotesListContainer from "../NotesListContainer/NotesListContainer";
+import { NotesContext, INote } from "../../context/NotesContext";
+
+import { NotesList } from "../../components";
 
 const Sidebar: FC = () => {
-  return <aside className={cn(styles.container)}>
-    <NotesListContainer />
-  </aside>;
+  const { notes, setNotes, setSelectedNote } = useContext(NotesContext);
+
+  const onNoteSelect = useCallback((id: string) => {
+    setNotes((currentData: INote[]): INote[] =>
+      currentData.map((note) => {
+        if (note.id === id) {
+          note.isSelected = true;
+          setSelectedNote(note);
+          return note;
+        } else {
+          note.isSelected = false;
+          return note;
+        }
+      })
+    );
+  }, []);
+
+  return (
+    <>
+      <NotesList notes={notes} onNoteSelect={onNoteSelect} />
+    </>
+  );
 };
 
 export default Sidebar;

@@ -16,13 +16,13 @@ interface IEventError extends Event {
   target: { error?: string } | any;
 }
 interface IDBMethods {
-  getAll: () => Promise<ISuccess | IError>;
-  deleteDB: () => Promise<ISuccess | IError>;
+  getAll: () => Promise<ISuccess>;
+  deleteDB: () => Promise<ISuccess>;
   deleteStorage: () => void;
-  add: (note: INote) => Promise<ISuccess | IError>;
-  put: (note: INote, id: string) => Promise<ISuccess | IError>;
-  delete: (id: string) => Promise<ISuccess | IError>;
-  clearDB: () => Promise<ISuccess | IError>;
+  add: (note: INote) => Promise<ISuccess>;
+  put: (note: INote, id: string) => Promise<ISuccess>;
+  delete: (id: string) => Promise<ISuccess>;
+  clearDB: () => Promise<ISuccess>;
 }
 interface IOpenDB {
   status: string;
@@ -36,7 +36,7 @@ async function initLocalDB(
   function deleteStorage(db: IDBDatabase): void {
     db?.deleteObjectStore(dbName);
   }
-  function deleteDB(): Promise<ISuccess | IError> {
+  function deleteDB(): Promise<ISuccess> {
     return new Promise((resolve, reject) => {
       const deleteRequest = indexedDB.deleteDatabase(storageName);
 
@@ -51,7 +51,7 @@ async function initLocalDB(
     });
   }
 
-  function add(db: IDBDatabase, note: INote): Promise<ISuccess | IError> {
+  function add(db: IDBDatabase, note: INote): Promise<ISuccess> {
     return new Promise((resolve, reject) => {
       const notes = db?.transaction([dbName], "readwrite").objectStore(dbName);
       const request = notes.add(note);
@@ -65,7 +65,7 @@ async function initLocalDB(
       };
     });
   }
-  function put(db: IDBDatabase, updatedNote: INote, id: string): Promise<ISuccess | IError> {
+  function put(db: IDBDatabase, updatedNote: INote, id: string): Promise<ISuccess> {
     return new Promise((resolve, reject) => {
       const notes = db?.transaction(dbName, "readwrite").objectStore(dbName);
       const idRequest = notes.get(id);
@@ -88,7 +88,7 @@ async function initLocalDB(
       };
     });
   }
-  function deleteItem(db: IDBDatabase, id: string): Promise<ISuccess | IError> {
+  function deleteItem(db: IDBDatabase, id: string): Promise<ISuccess> {
     return new Promise((resolve, reject) => {
       const notes = db?.transaction(dbName, "readwrite").objectStore(dbName);
       const idRequest = notes.get(id);
@@ -110,7 +110,7 @@ async function initLocalDB(
       };
     });
   }
-  function clearDB(db: IDBDatabase): Promise<ISuccess | IError> {
+  function clearDB(db: IDBDatabase): Promise<ISuccess> {
     return new Promise((resolve, reject) => {
       const notes = db?.transaction(dbName, "readwrite").objectStore(dbName);
       const clearRequest = notes.clear();
@@ -123,7 +123,7 @@ async function initLocalDB(
       };
     });
   }
-  function getAll(db: IDBDatabase): Promise<ISuccess | IError> {
+  function getAll(db: IDBDatabase): Promise<ISuccess> {
     return new Promise((resolve, reject) => {
       const notes = db?.transaction(dbName, "readwrite").objectStore(dbName);
       const getAllRequest = notes.getAll();

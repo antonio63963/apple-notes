@@ -9,22 +9,24 @@ interface IButtonGroup {
   onAddNote: () => void;
   onUpdateNote: () => void;
   onDeleteNote: () => void;
+  isDisabled: boolean;
 }
 
 const ButtonsGroup: FC<IButtonGroup> = ({
   onAddNote,
   onDeleteNote,
   onUpdateNote,
+  isDisabled,
 }) => {
   return (
     <div className={cn(styles.container)}>
       <Button onClick={onAddNote}>
         <IoAdd size={24} />
       </Button>
-      <Button onClick={onDeleteNote}>
+      <Button isDisabled={isDisabled} onClick={onDeleteNote}>
         <IoTrashOutline size={24} />
       </Button>
-      <Button onClick={onUpdateNote}>
+      <Button isDisabled={isDisabled} onClick={onUpdateNote}>
         <IoCreateOutline size={24} />
       </Button>
     </div>

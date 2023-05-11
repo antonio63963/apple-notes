@@ -1,48 +1,71 @@
-import { FC, useCallback, useState, useContext } from "react";
+import { FC, useCallback, useState, useContext, useEffect } from "react";
+// import { uid } from "uid";
 import SearchBox from "../SearchBox/SearchBox";
 import { Header, Form, ButtonsGroup } from "../../components";
 
+import { IError, NotesContext } from "../../context/NotesContext";
+import FormContainer from "../FormContainer/FormContainer";
+
+interface INote {
+  id: string;
+  title: string;
+  time: string;
+  description: string;
+  onClick: () => void;
+  isSelected: boolean;
+  date: Date;
+}
+type FormType = "create" | "update" | null;
+
 const HeaderContainer: FC = () => {
-  const [titleInput, setTitleInput] = useState<string>("");
-  const [descriptionInput, setDescriptionInput] = useState<string>("");
-  const [isForm, setIsForm] = useState<boolean>(false);
+  const [formType, setFormType] = useState<FormType>(null);
+  const [isShownForm, setIsShownForm] = useState<boolean>(false);
 
-  
-
-  const onClose = useCallback(() => {
-    setIsForm(false);
-  }, []);
-
-  const onSubmit = useCallback(() => {}, []);
+  const { localDB, setErrorInfo, setNotes, selectedNote } =
+    useContext(NotesContext);
 
   const onAddNote = useCallback(() => {
-    setIsForm(true)
-  }, []);
+    setFormType("create");
+    setIsShownForm(true);
+  }, [setFormType, setIsShownForm]);
   const onUpdateNote = useCallback(() => {
-    console.log("Update BUTTON");
-  }, []);
-  const onDeleteNote = useCallback(() => {
-    console.log("Delete BUTTON");
-  }, []);
+    setFormType("update");
+    setIsShownForm(true);
+  }, [setFormType, setIsShownForm]);
+  const onDeleteNote = useCallback(async () => {
+    if (localDB && localDB.delete && selectedNote) {
+      try {
+        const response = await localDB?.delete(selectedNote.id);
+        if (response.status === "ok") {
+          setNotes((currentDate) =>
+            currentDate.filter((note) => note.id !== selectedNote.id)
+          );
+        }
+      } catch (err: any) {
+        setErrorInfo({ title: err.title, message: err.message });
+      }
+    }
+  }, [localDB, selectedNote, setNotes, setErrorInfo]);
+
   return (
-    <Header>
-      {isForm && (
-        <Form
-          titleValue={titleInput}
-          descriptionValue={descriptionInput}
-          onTitleChange={setTitleInput}
-          onDescriptionChange={setDescriptionInput}
-          onClose={onClose}
-          onSubmit={onSubmit}
+    <>
+      {isShownForm && (
+        <FormContainer
+          selectedNote={formType === "update" ? selectedNote : null}
+          formType={formType}
+          close={() => setIsShownForm(false)}
         />
       )}
-      <ButtonsGroup
-        onAddNote={onAddNote}
-        onDeleteNote={onDeleteNote}
-        onUpdateNote={onUpdateNote}
-      />
-      <SearchBox />
-    </Header>
+      <Header>
+        <ButtonsGroup
+          isDisabled={!selectedNote}
+          onAddNote={onAddNote}
+          onDeleteNote={onDeleteNote}
+          onUpdateNote={onUpdateNote}
+        />
+        <SearchBox />
+      </Header>
+    </>
   );
 };
 

@@ -15,29 +15,37 @@ interface IError {
   title: string;
   message: any;
 }
+type ISetNotes = (data: INote[]) => INote[] | INote[] | [];
+
 interface IDBMethods {
-  getAll?: () => Promise<ISuccess | IError>;
-  deleteDB?: () => Promise<ISuccess | IError>;
+  getAll?: () => Promise<ISuccess>;
+  deleteDB?: () => Promise<ISuccess>;
   deleteStorage?: () => void;
-  add?: (note: INote) => Promise<ISuccess | IError>;
-  put?: (note: INote, id: string) => Promise<ISuccess | IError>;
-  delete?: (id: string) => Promise<ISuccess | IError>;
-  clearDB?: () => Promise<ISuccess | IError>;
+  add?: (note: INote) => Promise<ISuccess>;
+  put?: (note: INote, id: string) => Promise<ISuccess>;
+  delete?: (id: string) => Promise<ISuccess>;
+  clearDB?: () => Promise<ISuccess>;
 }
 
 interface INoteContext {
   notes: INote[] | [];
-  setNotes: (data: INote[]) => void;
+  setNotes: (data: ISetNotes) => void;
   localDB: IDBMethods | null;
+  errorInfo: IError | undefined | null;
+  setErrorInfo: (data:IError) => void;
+  selectedNote: INote | null;
+  setSelectedNote: (data: INote) => void;
 }
 
 const authContext = createContext<INoteContext>({
   notes: [],
-  setNotes: () => {
-    console.log();
-  },
-  localDB: {},
+  setNotes: () => {},
+  localDB: null,
+  errorInfo: null,
+  setErrorInfo: () => {},
+  selectedNote: null,
+  setSelectedNote: () => {},
 });
 
 export default authContext;
-export type { INote, IDBMethods };
+export type { INote, IDBMethods, IError, ISuccess };
