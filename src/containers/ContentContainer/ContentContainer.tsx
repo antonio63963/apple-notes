@@ -6,7 +6,7 @@ import NoteDetailsContainer from "../NoteDetailsContainer/NoteDetailesContainer"
 const ContentContainer: FC = () => {
   return (
     <div
-      style={{ position: "fixed", top: "0", bottom: "0", display: "flex" }}
+      style={{ position: "fixed", top: "0", bottom: "0", display: "flex"}}
       className={cn("appWidthContent", "topPadding")}
     >
       <Sidebar />

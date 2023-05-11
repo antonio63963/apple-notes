@@ -1,6 +1,6 @@
 import { FC, useContext } from "react";
 import { NotesContext } from "../../context/NotesContext";
-import { NoteDetails } from "../../components";
+import { EmptyDetails, NoteDetails } from "../../components";
 
 import { getFormatedTime, getMmDdYy } from "../../utils/date";
 
@@ -12,7 +12,7 @@ const NoteDetailsContainer: FC = () => {
   return (
     <>
       {!selectedNote ? (
-        <h1>No selected note...</h1>
+        <EmptyDetails />
       ) : (
         <NoteDetails
           date={getFormatedDate(selectedNote.date)}

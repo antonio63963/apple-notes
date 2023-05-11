@@ -21,6 +21,7 @@ interface INotesList {
 const NotesList: FC<INotesList> = ({ notes, onNoteSelect }) => {
   return (
     <aside className={cn(styles.container)}>
+      <div className={cn(styles.list)}>
       {notes.map((note) => {
         const time = getFormatedTime(note.date);
         return (
@@ -34,6 +35,7 @@ const NotesList: FC<INotesList> = ({ notes, onNoteSelect }) => {
           />
         );
       })}
+      </div>
     </aside>
   );
 };
