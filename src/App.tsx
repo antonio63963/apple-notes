@@ -21,6 +21,7 @@ function App() {
     message: string;
   } | null>(null);
   const [selectedNote, setSelectedNote] = useState<INote | null>(null);
+  const [searchFilter, setSearchFilter] = useState<string>("");
 
   const getLocalDB = useCallback(async () => {
     try {
@@ -49,6 +50,8 @@ function App() {
         setErrorInfo,
         selectedNote,
         setSelectedNote,
+        searchFilter,
+        setSearchFilter,
       }}
     >
       <div className="App">

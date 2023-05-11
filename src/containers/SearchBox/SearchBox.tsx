@@ -1,24 +1,30 @@
-import { FC, useState, useCallback } from "react";
+import { FC, useState, useCallback, useContext } from "react";
+
+import { NotesContext } from "../../context/NotesContext";
 
 import { Input, SearchButton } from "../../components";
 
 const SearchBox: FC = () => {
   const [isInput, setIsInput] = useState<boolean>(false);
-  const [value, setValue] = useState<string>("");
+
+  const { searchFilter, setSearchFilter } = useContext(NotesContext);
 
   const onLeaveInput = useCallback(() => {
-    console.log("value: ", value);
-    if (!value) {
+    if (!searchFilter) {
       setIsInput(false);
     }
-  }, [value, setValue]);
+  }, [searchFilter, setIsInput]);
 
   return (
     <div>
       {!isInput ? (
         <SearchButton onClick={() => setIsInput(true)} />
       ) : (
-        <Input value={value} setValue={setValue} onLeaveEmpty={onLeaveInput} />
+        <Input
+          value={searchFilter}
+          setValue={setSearchFilter}
+          onLeaveEmpty={onLeaveInput}
+        />
       )}
     </div>
   );

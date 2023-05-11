@@ -1,9 +1,9 @@
 import { FC } from "react";
-import cn from 'classnames';
+import cn from "classnames";
 import { Note } from "..";
 import { getFormatedTime } from "../../utils/date";
 
-import styles from './NotesList.module.css';
+import styles from "./NotesList.module.css";
 
 interface INote {
   id: string;
@@ -18,21 +18,7 @@ interface INotesList {
   onNoteSelect: (data: string) => void;
 }
 
-const NotesList: FC<INotesList> = ({notes, onNoteSelect}) => {
-  // const onNoteSelect = useCallback((id: string) => {
-  //   setNotes((currentData) =>
-  //     currentData.map((note) => {
-  //       if (note.id === id) {
-  //         note.isSelected = true;
-  //         return note;
-  //       } else {
-  //         note.isSelected = false;
-  //         return note;
-  //       }
-  //     })
-  //   );
-  // }, []);
-
+const NotesList: FC<INotesList> = ({ notes, onNoteSelect }) => {
   return (
     <aside className={cn(styles.container)}>
       {notes.map((note) => {
@@ -45,7 +31,6 @@ const NotesList: FC<INotesList> = ({notes, onNoteSelect}) => {
             description={note.description}
             isSelected={note.isSelected || null}
             onClick={() => onNoteSelect(note.id)}
- 
           />
         );
       })}

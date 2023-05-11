@@ -1,20 +1,11 @@
-import { FC, useCallback, useState, useContext, useEffect } from "react";
-// import { uid } from "uid";
-import SearchBox from "../SearchBox/SearchBox";
-import { Header, Form, ButtonsGroup } from "../../components";
+import { FC, useCallback, useState, useContext } from "react";
 
-import { IError, NotesContext } from "../../context/NotesContext";
+import SearchBox from "../SearchBox/SearchBox";
+import { Header, ButtonsGroup } from "../../components";
+
+import { NotesContext } from "../../context/NotesContext";
 import FormContainer from "../FormContainer/FormContainer";
 
-interface INote {
-  id: string;
-  title: string;
-  time: string;
-  description: string;
-  onClick: () => void;
-  isSelected: boolean;
-  date: Date;
-}
 type FormType = "create" | "update" | null;
 
 const HeaderContainer: FC = () => {

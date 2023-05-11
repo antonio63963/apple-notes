@@ -32,9 +32,11 @@ interface INoteContext {
   setNotes: (data: ISetNotes) => void;
   localDB: IDBMethods | null;
   errorInfo: IError | undefined | null;
-  setErrorInfo: (data:IError) => void;
+  setErrorInfo: (data: IError) => void;
   selectedNote: INote | null;
   setSelectedNote: (data: INote) => void;
+  searchFilter: string;
+  setSearchFilter: (data: string) => void;
 }
 
 const authContext = createContext<INoteContext>({
@@ -45,6 +47,8 @@ const authContext = createContext<INoteContext>({
   setErrorInfo: () => {},
   selectedNote: null,
   setSelectedNote: () => {},
+  searchFilter: "",
+  setSearchFilter: () => {},
 });
 
 export default authContext;

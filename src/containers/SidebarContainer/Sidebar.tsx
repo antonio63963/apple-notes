@@ -5,7 +5,8 @@ import { NotesContext, INote } from "../../context/NotesContext";
 import { NotesList } from "../../components";
 
 const Sidebar: FC = () => {
-  const { notes, setNotes, setSelectedNote } = useContext(NotesContext);
+  const { notes, setNotes, setSelectedNote, searchFilter } =
+    useContext(NotesContext);
 
   const onNoteSelect = useCallback((id: string) => {
     setNotes((currentData: INote[]): INote[] =>
@@ -24,7 +25,14 @@ const Sidebar: FC = () => {
 
   return (
     <>
-      <NotesList notes={notes} onNoteSelect={onNoteSelect} />
+      <NotesList
+        notes={
+          searchFilter
+            ? notes.filter((note) => note.title.includes(searchFilter))
+            : notes
+        }
+        onNoteSelect={onNoteSelect}
+      />
     </>
   );
 };
