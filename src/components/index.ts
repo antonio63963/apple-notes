@@ -7,3 +7,6 @@ export { default as Button } from "./Button/Button";
 export { default as ButtonsGroup } from "./OnNoteButtonsGroup/OnNoteButtonsGroup";
 export { default as Form } from "./Form/Form";
 export { default as Modal } from "./Modal/Modal";
+export { default as Header } from "./Header/Header";
+export { default as MessageModal } from "./MessageModal/MessageModal";
+export { default as NotesList } from "./NotesList/NotesList";
