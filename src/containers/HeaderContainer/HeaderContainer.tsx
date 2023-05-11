@@ -15,7 +15,7 @@ const HeaderContainer: FC = () => {
   const [isShownForm, setIsShownForm] = useState<boolean>(false);
 
   const { localDB, setNotes, selectedNote } = useContext(NotesContext);
-  const { setErrorInfo } = useContext(AppContext);
+  const { setErrorInfo, isSidebarOpen, setIsSidebarOpen } = useContext(AppContext);
 
   const onAddNote = useCallback(() => {
     setFormType("create");
@@ -40,7 +40,9 @@ const HeaderContainer: FC = () => {
     }
   }, [localDB, selectedNote, setNotes, setErrorInfo]);
 
-  const onMenu = useCallback(() => {}, []);
+  const onMenu = useCallback(() => {
+    setIsSidebarOpen(!isSidebarOpen);
+  }, [isSidebarOpen, setIsSidebarOpen]);
 
   return (
     <>
@@ -52,6 +54,7 @@ const HeaderContainer: FC = () => {
       )}
       <Header>
         <ButtonsGroup
+          isOpen={isSidebarOpen}
           onMenu={onMenu}
           isDisabled={!selectedNote}
           onAddNote={onAddNote}

@@ -1,12 +1,14 @@
 import { FC, useCallback, useContext } from "react";
 
 import { NotesContext, INote } from "../../context/NotesContext";
+import AppContext from "../../context/AppContext";
 
 import { NotesList } from "../../components";
 
 const Sidebar: FC = () => {
   const { notes, setNotes, setSelectedNote, searchFilter } =
     useContext(NotesContext);
+  const {isSidebarOpen} = useContext(AppContext)
 
   const onNoteSelect = useCallback((id: string) => {
     setNotes((currentData: INote[]): INote[] =>
@@ -26,6 +28,7 @@ const Sidebar: FC = () => {
   return (
     <>
       <NotesList
+        isOpen={isSidebarOpen}
         notes={
           searchFilter
             ? notes.filter((note) => note.title.includes(searchFilter))

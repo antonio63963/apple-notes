@@ -10,6 +10,7 @@
   background-color: var(--light-gray);
   border: none;
   border-radius: 10px;
+  height: 36px;
 }
 .input:focus {
   outline: 0;

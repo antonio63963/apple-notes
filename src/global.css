@@ -15,6 +15,7 @@
   font-family: "Montserrat", serif;
   color: var(--black);
 }
+
 textarea {
   border-radius: 5px;
   resize: none;
@@ -22,18 +23,13 @@ textarea {
 .appWidthContent {
   width: 100%;
   max-width: 1140px;
-  padding: 0 20px;
 }
 .topPadding {
-  padding-top: 75px;
+  padding-top: 70px;
 }
 
 .shadow {
   -webkit-box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.5);
   -moz-box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.5);
   box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.5);
-}
-body::-webkit-scrollbar-thumb {
-  background-color: black;
-  /* outline: 1px solid slategrey; */
 }

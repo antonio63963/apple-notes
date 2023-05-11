@@ -5,6 +5,7 @@
 .menuButton {
   display: none;
   cursor: pointer;
+  margin-left: 16px;
 }
 
 @media screen and (max-width: 850px) {

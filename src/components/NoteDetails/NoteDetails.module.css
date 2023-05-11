@@ -1,4 +1,7 @@
 .container {
+  min-width: 320px;
+  width: 100vw;
+  height: 100vh;
   padding: 20px 30px;
   width: 100%;
   border-right: 1px solid var(--gray);
@@ -23,4 +26,6 @@
   align-items: center;
   justify-content: center;
   border-right: 1px solid var(--gray);
+  white-space: nowrap;
+  padding: 20px;
 }

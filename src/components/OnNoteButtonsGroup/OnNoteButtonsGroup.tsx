@@ -5,6 +5,7 @@ import {
   IoTrashOutline,
   IoCreateOutline,
   IoMenu,
+  IoClose,
 } from "react-icons/io5";
 
 import styles from "./OnNoteButtonsGroup.module.css";
@@ -15,6 +16,7 @@ interface IButtonGroup {
   onUpdateNote: () => void;
   onDeleteNote: () => void;
   onMenu: () => void;
+  isOpen: boolean;
   isDisabled: boolean;
 }
 
@@ -23,11 +25,13 @@ const ButtonsGroup: FC<IButtonGroup> = ({
   onDeleteNote,
   onUpdateNote,
   isDisabled,
+  onMenu,
+  isOpen,
 }) => {
   return (
     <>
-      <div className={cn(styles.menuButton)}>
-        <IoMenu size={24}/>
+      <div className={cn(styles.menuButton)} onClick={onMenu}>
+        {isOpen ? <IoClose size={24} /> : <IoMenu size={24}/>}
       </div>
       <div className={cn(styles.container)}>
         <Button onClick={onAddNote}>

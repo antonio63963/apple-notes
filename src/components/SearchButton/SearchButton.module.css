@@ -1,11 +1,12 @@
 .container {
   width: 208px;
   border-radius: var(--radius);
-  height: 32px;
+  height: 36px;
   background-color: var(--light-gray);
   display: flex;
   align-items: center;
   justify-content: center;
+
 }
 .text {
   color: var(--deep-gray);

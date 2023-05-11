@@ -16,25 +16,27 @@ interface INote {
 interface INotesList {
   notes: INote[] | [];
   onNoteSelect: (data: string) => void;
+  isOpen: boolean;
 }
 
-const NotesList: FC<INotesList> = ({ notes, onNoteSelect }) => {
+const NotesList: FC<INotesList> = ({ notes, onNoteSelect, isOpen }) => {
+
   return (
     <aside className={cn(styles.container)}>
-      <div className={cn(styles.list)}>
-      {notes.map((note) => {
-        const time = getFormatedTime(note.date);
-        return (
-          <Note
-            key={note.id}
-            title={note.title}
-            time={time}
-            description={note.description}
-            isSelected={note.isSelected || null}
-            onClick={() => onNoteSelect(note.id)}
-          />
-        );
-      })}
+      <div className={cn(styles.list, isOpen ? styles.mobileSidebar : null)}>
+        {notes.map((note) => {
+          const time = getFormatedTime(note.date);
+          return (
+            <Note
+              key={note.id}
+              title={note.title}
+              time={time}
+              description={note.description}
+              isSelected={note.isSelected || null}
+              onClick={() => onNoteSelect(note.id)}
+            />
+          );
+        })}
       </div>
     </aside>
   );
