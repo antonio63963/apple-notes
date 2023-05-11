@@ -21,8 +21,7 @@ interface IForm {
 }
 
 const FormContainer: FC<IForm> = ({ close, selectedNote }) => {
-  const { localDB, setNotes, setSelectedNote } =
-    useContext(NotesContext);
+  const { localDB, setNotes, setSelectedNote } = useContext(NotesContext);
   const { setErrorInfo } = useContext(AppContext);
 
   const [titleInput, setTitleInput] = useState<string>(
@@ -52,7 +51,14 @@ const FormContainer: FC<IForm> = ({ close, selectedNote }) => {
       try {
         const { data } = await localDB.add(newNote);
         if (data) {
-          setNotes((currentData) => [newNote, ...currentData]);
+          setNotes((currentData) => [
+            { ...newNote, isSelected: true },
+            ...currentData.map((note) => {
+              note.isSelected = false;
+              return note;
+            }),
+          ]);
+          setSelectedNote({ ...newNote, isSelected: true });
           onClose();
         } else {
           setErrorInfo({
