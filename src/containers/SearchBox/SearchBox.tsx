@@ -1,4 +1,7 @@
 import { FC, useState, useCallback, useContext } from "react";
+import cn from "classnames";
+
+import styles from "./SearchBox.module.css";
 
 import { NotesContext } from "../../context/NotesContext";
 
@@ -16,7 +19,7 @@ const SearchBox: FC = () => {
   }, [searchFilter, setIsInput]);
 
   return (
-    <div>
+    <div className={cn(styles.container)}>
       {!isInput ? (
         <SearchButton onClick={() => setIsInput(true)} />
       ) : (

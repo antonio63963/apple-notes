@@ -11,3 +11,5 @@ export { default as Header } from "./Header/Header";
 export { default as MessageModal } from "./MessageModal/MessageModal";
 export { default as NotesList } from "./NotesList/NotesList";
 export { default as EmptyDetails } from "./NoteDetails/EmptyDetails";
+export { default as MobileHeader } from "./MobileHeader/MobileHeader";
+export { default as DesktopHeader } from "./DesktopHeader/DesktopHeader";

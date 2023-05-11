@@ -1,12 +1,13 @@
 import { FC, useCallback, useState, useContext } from "react";
 
 import SearchBox from "../SearchBox/SearchBox";
-import { Header, ButtonsGroup } from "../../components";
+import { Header, ButtonsGroup, DesktopHeader } from "../../components";
 
 import { NotesContext } from "../../context/NotesContext";
 import AppContext from "../../context/AppContext";
 
 import FormContainer from "../FormContainer/FormContainer";
+import { MobileHeader } from "../../components";
 
 type FormType = "create" | "update" | null;
 
@@ -15,7 +16,8 @@ const HeaderContainer: FC = () => {
   const [isShownForm, setIsShownForm] = useState<boolean>(false);
 
   const { localDB, setNotes, selectedNote } = useContext(NotesContext);
-  const { setErrorInfo, isSidebarOpen, setIsSidebarOpen } = useContext(AppContext);
+  const { setErrorInfo, isSidebarOpen, setIsSidebarOpen } =
+    useContext(AppContext);
 
   const onAddNote = useCallback(() => {
     setFormType("create");
@@ -53,15 +55,20 @@ const HeaderContainer: FC = () => {
         />
       )}
       <Header>
-        <ButtonsGroup
-          isOpen={isSidebarOpen}
+        <MobileHeader
           onMenu={onMenu}
-          isDisabled={!selectedNote}
+          isOpen={isSidebarOpen}
+          isSelectedNote={!selectedNote}
           onAddNote={onAddNote}
           onDeleteNote={onDeleteNote}
           onUpdateNote={onUpdateNote}
         />
-        <SearchBox />
+        <DesktopHeader
+          isSelectedNote={!selectedNote}
+          onAddNote={onAddNote}
+          onDeleteNote={onDeleteNote}
+          onUpdateNote={onUpdateNote}
+        />
       </Header>
     </>
   );

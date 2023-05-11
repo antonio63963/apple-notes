@@ -8,22 +8,27 @@ import { NotesList } from "../../components";
 const Sidebar: FC = () => {
   const { notes, setNotes, setSelectedNote, searchFilter } =
     useContext(NotesContext);
-  const {isSidebarOpen} = useContext(AppContext)
+  const { isSidebarOpen, setIsSidebarOpen } = useContext(AppContext);
 
-  const onNoteSelect = useCallback((id: string) => {
-    setNotes((currentData: INote[]): INote[] =>
-      currentData.map((note) => {
-        if (note.id === id) {
-          note.isSelected = true;
-          setSelectedNote(note);
-          return note;
-        } else {
-          note.isSelected = false;
-          return note;
-        }
-      })
-    );
-  }, [setSelectedNote, setNotes]);
+  const onNoteSelect = useCallback(
+    (id: string) => {
+      setNotes((currentData: INote[]): INote[] =>
+        currentData.map((note) => {
+          if (note.id === id) {
+            note.isSelected = true;
+            setSelectedNote(note);
+            setIsSidebarOpen(false);
+            return note;
+          } else {
+            note.isSelected = false;
+            setIsSidebarOpen(false);
+            return note;
+          }
+        })
+      );
+    },
+    [setSelectedNote, setNotes]
+  );
 
   return (
     <>
