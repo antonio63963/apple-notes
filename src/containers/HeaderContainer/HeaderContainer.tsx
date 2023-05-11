@@ -52,7 +52,6 @@ const HeaderContainer: FC = () => {
       {isShownForm && (
         <FormContainer
           selectedNote={formType === "update" ? selectedNote : null}
-          formType={formType}
           close={() => setIsShownForm(false)}
         />
       )}

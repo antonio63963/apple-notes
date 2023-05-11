@@ -5,7 +5,7 @@ interface INote {
   title: string;
   date: Date;
   description: string;
-  isSelected: boolean;
+  isSelected?: boolean;
 }
 interface ISuccess {
   status: string;

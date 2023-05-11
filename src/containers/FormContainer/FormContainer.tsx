@@ -1,26 +1,26 @@
-import { FC, useState, useCallback, useContext } from "react";
+import { FC, useState, useCallback, useContext, useEffect } from "react";
 import { uid } from "uid";
 import { IError, NotesContext } from "../../context/NotesContext";
 import { Form } from "../../components";
 
-type FormType = "create" | "update" | null;
+// type FormType = "create" | "update" | null;
 
 interface INote {
   id: string;
   title: string;
   date: Date;
   description: string;
-  isSelected: boolean;
+  isSelected?: boolean;
 }
 
 interface IForm {
   close: () => void;
-  formType: FormType;
   selectedNote?: INote | null;
 }
 
-const FormContainer: FC<IForm> = ({ close, formType, selectedNote }) => {
-  const { localDB, setErrorInfo, setNotes } = useContext(NotesContext);
+const FormContainer: FC<IForm> = ({ close, selectedNote }) => {
+  const { localDB, setErrorInfo, setNotes, setSelectedNote } =
+    useContext(NotesContext);
 
   const [titleInput, setTitleInput] = useState<string>(
     selectedNote ? selectedNote.title : ""
@@ -63,10 +63,70 @@ const FormContainer: FC<IForm> = ({ close, formType, selectedNote }) => {
       }
     }
   }, [setNotes, localDB, titleInput, descriptionInput]);
+  //update
+  const onUpdateTitle = useCallback(async (title: string) => {
+    if (selectedNote && localDB && localDB.put) {
+      const noteWithNewTitle = { ...selectedNote, title };
+      try {
+        const { data } = await localDB.put(noteWithNewTitle, selectedNote.id);
+        if (data) {
+          setSelectedNote(noteWithNewTitle);
+          setNotes((currentData) => {
+            const idx = currentData.findIndex(
+              (note) => note.id === selectedNote.id
+            );
+            if (idx !== -1) {
+              currentData[idx] = noteWithNewTitle;
+              return [...currentData];
+            }
+            return currentData;
+          });
+        }
+      } catch (err: any) {
+        setErrorInfo({ title: err.title, message: err.message });
+      }
+    }
+  }, []);
+  const onUpdateDescription = useCallback(async (description: string) => {
+    if (selectedNote && localDB && localDB.put) {
+      const noteWithNewTitle = { ...selectedNote, description };
+      try {
+        const { data } = await localDB.put(noteWithNewTitle, selectedNote.id);
+        if (data) {
+          setSelectedNote(noteWithNewTitle);
+          setNotes((currentData) => {
+            const idx = currentData.findIndex(
+              (note) => note.id === selectedNote.id
+            );
+            if (idx !== -1) {
+              currentData[idx] = noteWithNewTitle;
+              return [...currentData];
+            }
+            return currentData;
+          });
+        }
+      } catch (err: any) {
+        setErrorInfo({ title: err.title, message: err.message });
+      }
+    }
+  }, []);
+
+  useEffect(() => {
+    if (selectedNote) {
+      onUpdateTitle(titleInput);
+    }
+  }, [titleInput]);
+
+  useEffect(() => {
+    if (selectedNote) {
+      onUpdateDescription(descriptionInput);
+    }
+  }, [descriptionInput]);
 
   return (
     <Form
-      formTitle={formType === "create" ? "Create new note" : "Update note"}
+      type={!selectedNote ? "create" : "update"}
+      formTitle={!selectedNote ? "Create new note" : "Update note"}
       titleValue={titleInput}
       descriptionValue={descriptionInput}
       onTitleChange={setTitleInput}

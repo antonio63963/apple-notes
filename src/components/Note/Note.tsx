@@ -8,7 +8,7 @@ interface INote {
   time: string;
   description: string;
   onClick: () => void;
-  isSelected: boolean;
+  isSelected: boolean | null;
 }
 
 const Note: FC<INote> = ({

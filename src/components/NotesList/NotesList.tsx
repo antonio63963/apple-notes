@@ -10,34 +10,8 @@ interface INote {
   title: string;
   date: Date;
   description: string;
-  isSelected: boolean;
+  isSelected?: boolean | null;
 }
-const mock: INote[] = [
-  {
-    id: "1",
-    title: "Test 1",
-    date: new Date(),
-    description:
-      "Необхідно створити спрощену копію програми Нотатки з операційної системи Apple macOS за допомогою Reactjs. Програма має бути створена за допомогою create-react-app",
-    isSelected: false,
-  },
-  {
-    id: "2",
-    title: "Test 2",
-    date: new Date(),
-    description:
-      "Зовнішній вигляд програми складається з сайдбару, області для перегляду/редагування/додавання нотатки та пошуку за нотатками",
-    isSelected: false,
-  },
-  {
-    id: "3",
-    title: "Test 3",
-    date: new Date(),
-    description:
-      "При виборі нотатки зліва, праворуч повинен відображатися відрендерований Markdown текст із локальної бази даних браузера (дивитися на indexeddb)",
-    isSelected: false,
-  },
-];
 
 interface INotesList {
   notes: INote[] | [];
@@ -69,7 +43,7 @@ const NotesList: FC<INotesList> = ({notes, onNoteSelect}) => {
             title={note.title}
             time={time}
             description={note.description}
-            isSelected={note.isSelected}
+            isSelected={note.isSelected || null}
             onClick={() => onNoteSelect(note.id)}
  
           />
