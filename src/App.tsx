@@ -1,11 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
-import {
-  NotesContext,
-  INote,
-  IDBMethods,
-  IError,
-  ISuccess,
-} from "./context/NotesContext";
+import { NotesContext, INote, IDBMethods } from "./context/NotesContext";
+import AppContext from "./context/AppContext";
+
 import initLocalDB from "./services/indexedDB";
 
 import MainPage from "./pages/MainPage";
@@ -22,6 +18,7 @@ function App() {
   } | null>(null);
   const [selectedNote, setSelectedNote] = useState<INote | null>(null);
   const [searchFilter, setSearchFilter] = useState<string>("");
+  const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(false);
 
   const getLocalDB = useCallback(async () => {
     try {
@@ -41,30 +38,32 @@ function App() {
   }, []);
 
   return (
-    <NotesContext.Provider
-      value={{
-        localDB,
-        notes,
-        setNotes,
-        errorInfo,
-        setErrorInfo,
-        selectedNote,
-        setSelectedNote,
-        searchFilter,
-        setSearchFilter,
-      }}
+    <AppContext.Provider
+      value={{ errorInfo, setErrorInfo, isSidebarOpen, setIsSidebarOpen }}
     >
-      <div className="App">
-        {localDB ? <MainPage /> : <h1>Loading...</h1>}
-        {errorInfo && (
-          <MessageModal
-            onClose={() => setErrorInfo(null)}
-            title={errorInfo.title}
-            message={errorInfo.message}
-          />
-        )}
-      </div>
-    </NotesContext.Provider>
+      <NotesContext.Provider
+        value={{
+          localDB,
+          notes,
+          setNotes,
+          selectedNote,
+          setSelectedNote,
+          searchFilter,
+          setSearchFilter,
+        }}
+      >
+        <div className="App">
+          {localDB ? <MainPage /> : <h1>Loading...</h1>}
+          {errorInfo && (
+            <MessageModal
+              onClose={() => setErrorInfo(null)}
+              title={errorInfo.title}
+              message={errorInfo.message}
+            />
+          )}
+        </div>
+      </NotesContext.Provider>
+    </AppContext.Provider>
   );
 }
 

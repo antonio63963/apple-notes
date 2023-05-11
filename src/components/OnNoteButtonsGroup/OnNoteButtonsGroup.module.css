@@ -2,3 +2,16 @@
   display: flex;
   flex-wrap: nowrap;
 }
+.menuButton {
+  display: none;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 850px) {
+  .container {
+    display: none;
+  }
+  .menuButton {
+    display: block;
+  }
+}

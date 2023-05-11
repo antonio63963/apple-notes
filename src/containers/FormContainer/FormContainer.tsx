@@ -1,6 +1,8 @@
 import { FC, useState, useCallback, useContext, useEffect } from "react";
 import { uid } from "uid";
-import { IError, NotesContext } from "../../context/NotesContext";
+import { NotesContext } from "../../context/NotesContext";
+import AppContext from "../../context/AppContext";
+
 import { Form } from "../../components";
 
 // type FormType = "create" | "update" | null;
@@ -19,8 +21,9 @@ interface IForm {
 }
 
 const FormContainer: FC<IForm> = ({ close, selectedNote }) => {
-  const { localDB, setErrorInfo, setNotes, setSelectedNote } =
+  const { localDB, setNotes, setSelectedNote } =
     useContext(NotesContext);
+  const { setErrorInfo } = useContext(AppContext);
 
   const [titleInput, setTitleInput] = useState<string>(
     selectedNote ? selectedNote.title : ""
@@ -68,7 +71,10 @@ const FormContainer: FC<IForm> = ({ close, selectedNote }) => {
     if (selectedNote && localDB && localDB.put) {
       const noteWithNewTitle = { ...selectedNote, title };
       try {
-        const { data } = await localDB.put({ ...selectedNote, title, isSelected: false }, selectedNote.id);
+        const { data } = await localDB.put(
+          { ...selectedNote, title, isSelected: false },
+          selectedNote.id
+        );
         if (data) {
           setSelectedNote(noteWithNewTitle);
           setNotes((currentData) => {

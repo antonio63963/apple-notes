@@ -1,6 +1,11 @@
 import { FC, useCallback } from "react";
 import cn from "classnames";
-import { IoAdd, IoTrashOutline, IoCreateOutline } from "react-icons/io5";
+import {
+  IoAdd,
+  IoTrashOutline,
+  IoCreateOutline,
+  IoMenu,
+} from "react-icons/io5";
 
 import styles from "./OnNoteButtonsGroup.module.css";
 import Button from "../Button/Button";
@@ -9,6 +14,7 @@ interface IButtonGroup {
   onAddNote: () => void;
   onUpdateNote: () => void;
   onDeleteNote: () => void;
+  onMenu: () => void;
   isDisabled: boolean;
 }
 
@@ -19,17 +25,22 @@ const ButtonsGroup: FC<IButtonGroup> = ({
   isDisabled,
 }) => {
   return (
-    <div className={cn(styles.container)}>
-      <Button onClick={onAddNote}>
-        <IoAdd size={24} />
-      </Button>
-      <Button isDisabled={isDisabled} onClick={onDeleteNote}>
-        <IoTrashOutline size={24} />
-      </Button>
-      <Button isDisabled={isDisabled} onClick={onUpdateNote}>
-        <IoCreateOutline size={24} />
-      </Button>
-    </div>
+    <>
+      <div className={cn(styles.menuButton)}>
+        <IoMenu size={24}/>
+      </div>
+      <div className={cn(styles.container)}>
+        <Button onClick={onAddNote}>
+          <IoAdd size={24} />
+        </Button>
+        <Button isDisabled={isDisabled} onClick={onDeleteNote}>
+          <IoTrashOutline size={24} />
+        </Button>
+        <Button isDisabled={isDisabled} onClick={onUpdateNote}>
+          <IoCreateOutline size={24} />
+        </Button>
+      </div>
+    </>
   );
 };
 

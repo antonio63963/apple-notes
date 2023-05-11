@@ -4,6 +4,8 @@ import SearchBox from "../SearchBox/SearchBox";
 import { Header, ButtonsGroup } from "../../components";
 
 import { NotesContext } from "../../context/NotesContext";
+import AppContext from "../../context/AppContext";
+
 import FormContainer from "../FormContainer/FormContainer";
 
 type FormType = "create" | "update" | null;
@@ -12,8 +14,8 @@ const HeaderContainer: FC = () => {
   const [formType, setFormType] = useState<FormType>(null);
   const [isShownForm, setIsShownForm] = useState<boolean>(false);
 
-  const { localDB, setErrorInfo, setNotes, selectedNote } =
-    useContext(NotesContext);
+  const { localDB, setNotes, selectedNote } = useContext(NotesContext);
+  const { setErrorInfo } = useContext(AppContext);
 
   const onAddNote = useCallback(() => {
     setFormType("create");
@@ -38,6 +40,8 @@ const HeaderContainer: FC = () => {
     }
   }, [localDB, selectedNote, setNotes, setErrorInfo]);
 
+  const onMenu = useCallback(() => {}, []);
+
   return (
     <>
       {isShownForm && (
@@ -48,6 +52,7 @@ const HeaderContainer: FC = () => {
       )}
       <Header>
         <ButtonsGroup
+          onMenu={onMenu}
           isDisabled={!selectedNote}
           onAddNote={onAddNote}
           onDeleteNote={onDeleteNote}

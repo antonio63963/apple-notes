@@ -1,13 +1,13 @@
 import { FC } from "react";
 import cn from "classnames";
+import styles from './Content.module.css'
 import { Sidebar } from "../../components";
 import NoteDetailsContainer from "../NoteDetailsContainer/NoteDetailesContainer";
 
 const ContentContainer: FC = () => {
   return (
     <div
-      style={{ position: "fixed", top: "0", bottom: "0", display: "flex"}}
-      className={cn("appWidthContent", "topPadding")}
+      className={cn("appWidthContent", "topPadding", styles.layout)}
     >
       <Sidebar />
       <NoteDetailsContainer />

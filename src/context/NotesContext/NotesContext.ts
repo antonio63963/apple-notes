@@ -31,24 +31,24 @@ interface INoteContext {
   notes: INote[] | [];
   setNotes: (data: ISetNotes) => void;
   localDB: IDBMethods | null;
-  errorInfo: IError | undefined | null;
-  setErrorInfo: (data: IError) => void;
   selectedNote: INote | null;
   setSelectedNote: (data: INote) => void;
   searchFilter: string;
   setSearchFilter: (data: string) => void;
+  // errorInfo: IError | undefined | null;
+  // setErrorInfo: (data: IError) => void;
 }
 
 const authContext = createContext<INoteContext>({
   notes: [],
   setNotes: () => {},
   localDB: null,
-  errorInfo: null,
-  setErrorInfo: () => {},
   selectedNote: null,
   setSelectedNote: () => {},
   searchFilter: "",
   setSearchFilter: () => {},
+  // errorInfo: null,
+  // setErrorInfo: () => {},
 });
 
 export default authContext;
