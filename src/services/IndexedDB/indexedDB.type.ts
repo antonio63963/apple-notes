@@ -17,16 +17,16 @@ interface IEventError extends Event {
 }
 interface IDBMethods {
   getAll: () => Promise<ISuccess>;
-  deleteDB: () => Promise<ISuccess>;
-  deleteStorage: () => void;
+  deleteDB?: () => Promise<ISuccess>;
+  deleteStorage?: () => void;
   add: (note: INote) => Promise<ISuccess>;
   put: (note: INote, id: string) => Promise<ISuccess>;
   delete: (id: string) => Promise<ISuccess>;
-  clearDB: () => Promise<ISuccess>;
+  clearDB?: () => Promise<ISuccess>;
 }
 interface IOpenDB {
   status: string;
   data: IDBMethods;
 }
 
-export type { INote, IError, ISuccess, IEventError, IOpenDB };
+export type { INote, IError, ISuccess, IEventError, IOpenDB, IDBMethods };
