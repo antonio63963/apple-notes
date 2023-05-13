@@ -8,7 +8,7 @@ import { Form } from "../../components";
 import { IForm } from "./FormContainer.type";
 
 const FormContainer: FC<IForm> = ({ close, selectedNote }) => {
-  const { localDB, setNotes, setSelectedNote } = useContext(NotesContext);
+  const { db, setNotes, setSelectedNote } = useContext(NotesContext);
   const { setErrorInfo } = useContext(AppContext);
 
   const [titleInput, setTitleInput] = useState<string>(
@@ -32,11 +32,11 @@ const FormContainer: FC<IForm> = ({ close, selectedNote }) => {
       date: new Date(),
       isSelected: false,
     };
-    if (localDB && localDB.add) {
+    if (db && db.add) {
       console.log("Works", newNote);
       console.log(titleInput);
       try {
-        const { data } = await localDB.add(newNote);
+        const { data } = await db.add(newNote);
         if (data) {
           setNotes((currentData) => [
             { ...newNote, isSelected: true },
@@ -58,13 +58,13 @@ const FormContainer: FC<IForm> = ({ close, selectedNote }) => {
         onClose();
       }
     }
-  }, [setNotes, localDB, titleInput, descriptionInput]);
+  }, [setNotes, db, titleInput, descriptionInput]);
   //update
   const onUpdateTitle = useCallback(async (title: string) => {
-    if (selectedNote && localDB && localDB.put) {
+    if (selectedNote && db && db.put) {
       const noteWithNewTitle = { ...selectedNote, title };
       try {
-        const { data } = await localDB.put(
+        const { data } = await db.put(
           { ...selectedNote, title, isSelected: false },
           selectedNote.id
         );
@@ -85,12 +85,12 @@ const FormContainer: FC<IForm> = ({ close, selectedNote }) => {
         setErrorInfo({ title: err.title, message: err.message });
       }
     }
-  }, []);
+  }, [db, setErrorInfo, setNotes, setSelectedNote]);
   const onUpdateDescription = useCallback(async (description: string) => {
-    if (selectedNote && localDB && localDB.put) {
+    if (selectedNote && db && db.put) {
       const noteWithNewTitle = { ...selectedNote, description };
       try {
-        const { data } = await localDB.put(noteWithNewTitle, selectedNote.id);
+        const { data } = await db.put(noteWithNewTitle, selectedNote.id);
         if (data) {
           setSelectedNote(noteWithNewTitle);
           setNotes((currentData) => {
@@ -108,7 +108,7 @@ const FormContainer: FC<IForm> = ({ close, selectedNote }) => {
         setErrorInfo({ title: err.title, message: err.message });
       }
     }
-  }, []);
+  }, [db, setErrorInfo, setNotes, setSelectedNote]);
 
   useEffect(() => {
     if (selectedNote) {

@@ -17,24 +17,22 @@ type ISetNotes = (data: INote[]) => INote[] | INote[] | [];
 
 interface IDBMethods {
   getAll?: () => Promise<ISuccess>;
-  deleteDB?: () => Promise<ISuccess>;
-  deleteStorage?: () => void;
+  // deleteDB?: () => Promise<ISuccess>;
+  // deleteStorage?: () => void;
   add?: (note: INote) => Promise<ISuccess>;
   put?: (note: INote, id: string) => Promise<ISuccess>;
   delete?: (id: string) => Promise<ISuccess>;
-  clearDB?: () => Promise<ISuccess>;
+  // clearDB?: () => Promise<ISuccess>;
 }
 
 interface INoteContext {
   notes: INote[] | [];
   setNotes: (data: ISetNotes) => void;
-  localDB: IDBMethods | null;
+  db: IDBMethods | null;
   selectedNote: INote | null;
   setSelectedNote: (data: INote) => void;
   searchFilter: string;
   setSearchFilter: (data: string) => void;
-  // errorInfo: IError | undefined | null;
-  // setErrorInfo: (data: IError) => void;
 }
 
 export type { INoteContext, INote, IDBMethods, IError, ISuccess };
