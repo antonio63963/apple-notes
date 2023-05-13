@@ -5,13 +5,13 @@ import { IoClose } from "react-icons/io5";
 import Button from "../Button/Button";
 import Modal from "../Modal/Modal";
 
-interface IForm {
+interface IModal {
   onClose: () => void;
   title: string;
   message: string;
 }
 
-const Form: FC<IForm> = ({ onClose, title, message }) => {
+const MessageModal: FC<IModal> = ({ onClose, title, message }) => {
   return (
     <Modal onClose={onClose} title={title}>
       <p>{message}</p>
@@ -22,4 +22,4 @@ const Form: FC<IForm> = ({ onClose, title, message }) => {
   );
 };
 
-export default Form;
+export default MessageModal;

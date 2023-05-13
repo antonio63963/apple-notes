@@ -13,3 +13,4 @@ export { default as NotesList } from "./NotesList/NotesList";
 export { default as EmptyDetails } from "./NoteDetails/EmptyDetails";
 export { default as MobileHeader } from "./MobileHeader/MobileHeader";
 export { default as DesktopHeader } from "./DesktopHeader/DesktopHeader";
+export { default as SelectDBModal } from "./SelectDBModal/SelectDBModal";

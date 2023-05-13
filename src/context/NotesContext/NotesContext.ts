@@ -2,15 +2,14 @@ import { createContext } from "react";
 
 import { INoteContext } from "./NotesContext.type";
 
-const authContext = createContext<INoteContext>({
+const NotesContext = createContext<INoteContext>({
   notes: [],
   setNotes: () => {},
-  localDB: null,
+  db: null,
   selectedNote: null,
   setSelectedNote: () => {},
   searchFilter: "",
   setSearchFilter: () => {},
 });
 
-export default authContext;
-// export type { INote, IDBMethods, IError, ISuccess };
+export default NotesContext;
