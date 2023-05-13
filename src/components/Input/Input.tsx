@@ -3,6 +3,7 @@ import cn from "classnames";
 import { IoCloseCircleOutline } from "react-icons/io5";
 
 import styles from "./Input.module.css";
+
 interface TInput {
   value: string;
   setValue: (data: string) => void;

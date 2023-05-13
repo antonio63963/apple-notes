@@ -7,25 +7,7 @@ import styles from "./Form.module.css";
 import Button from "../Button/Button";
 import Modal from "../Modal/Modal";
 
-interface INote {
-  id: string;
-  title: string;
-  description: string;
-  date: Date;
-}
-
-type FormType = "create" | "update";
-
-interface IForm {
-  formTitle: string;
-  onClose: () => void;
-  onSave: () => void;
-  titleValue: string;
-  descriptionValue: string;
-  onDescriptionChange: (data: string) => void;
-  onTitleChange: (data: string) => void;
-  type: FormType;
-}
+import { IForm } from "./Form.type";
 
 const Form: FC<IForm> = ({
   type,

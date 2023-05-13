@@ -1,6 +1,6 @@
 import { FC, ReactNode } from "react";
 import cn from "classnames";
-import { IoClose, IoSave } from "react-icons/io5";
+import { IoClose } from "react-icons/io5";
 
 import styles from "./Modal.module.css";
 

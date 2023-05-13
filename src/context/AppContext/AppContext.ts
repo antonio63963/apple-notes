@@ -1,16 +1,6 @@
 import { createContext } from "react";
 
-interface IError {
-  title: string;
-  message: any;
-}
-
-interface IAppContext {
-  errorInfo: IError | undefined | null;
-  setErrorInfo: (data: IError) => void;
-  isSidebarOpen: boolean;
-  setIsSidebarOpen: (data: boolean) => void;
-}
+import { IAppContext, IError } from "./AppContext.type";
 
 const appContext = createContext<IAppContext>({
   errorInfo: null,

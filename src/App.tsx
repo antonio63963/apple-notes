@@ -2,7 +2,8 @@ import React, { useState, useEffect, useCallback } from "react";
 import { NotesContext, INote, IDBMethods } from "./context/NotesContext";
 import AppContext from "./context/AppContext";
 
-import initLocalDB from "./services/indexedDB";
+import initLocalDB from "./services/IndexedDB/indexedDB";
+import { getAll, createNote } from "./services/quintaDB/quinta";
 
 import MainPage from "./pages/MainPage";
 

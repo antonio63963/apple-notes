@@ -3,14 +3,9 @@ import cn from "classnames";
 
 import styles from "./SearchButton.module.css";
 
-import { IconContext } from "react-icons";
 import { IoSearch } from "react-icons/io5";
 
-interface ISearchButton {
-  onClick: () => void;
-}
-
-const SearchButton: FC<ISearchButton> = ({onClick}) => {
+const SearchButton: FC<{onClick: () => void}> = ({onClick}) => {
   return (
     <div className={cn(styles.container)} onClick={onClick}>
       <IoSearch fill="#8a8989" />

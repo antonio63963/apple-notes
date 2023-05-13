@@ -3,11 +3,7 @@ import cn from "classnames";
 
 import styles from "./Button.module.css";
 
-interface IButton {
-  children: ReactNode;
-  onClick: () => void;
-  isDisabled?: boolean;
-}
+import { IButton } from "./Button.type";
 
 const IconButton: FC<IButton> = ({ children, onClick, isDisabled = false }) => {
   return (

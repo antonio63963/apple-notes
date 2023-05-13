@@ -1,16 +1,11 @@
-import { FC, useCallback } from "react";
+import { FC } from "react";
 import cn from "classnames";
 import { IoAdd, IoTrashOutline, IoCreateOutline } from "react-icons/io5";
 
 import styles from "./OnNoteButtonsGroup.module.css";
 import Button from "../Button/Button";
 
-interface IButtonGroup {
-  onAddNote: () => void;
-  onUpdateNote: () => void;
-  onDeleteNote: () => void;
-  isDisabled: boolean;
-}
+import { IButtonGroup } from "./ButtonGroup.type";
 
 const ButtonsGroup: FC<IButtonGroup> = ({
   onAddNote,

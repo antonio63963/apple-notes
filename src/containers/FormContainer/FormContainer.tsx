@@ -5,20 +5,7 @@ import AppContext from "../../context/AppContext";
 
 import { Form } from "../../components";
 
-// type FormType = "create" | "update" | null;
-
-interface INote {
-  id: string;
-  title: string;
-  date: Date;
-  description: string;
-  isSelected?: boolean;
-}
-
-interface IForm {
-  close: () => void;
-  selectedNote?: INote | null;
-}
+import { IForm } from "./FormContainer.type";
 
 const FormContainer: FC<IForm> = ({ close, selectedNote }) => {
   const { localDB, setNotes, setSelectedNote } = useContext(NotesContext);

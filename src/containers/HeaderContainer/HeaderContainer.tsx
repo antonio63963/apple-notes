@@ -1,13 +1,10 @@
 import { FC, useCallback, useState, useContext } from "react";
 
-import SearchBox from "../SearchBox/SearchBox";
-import { Header, ButtonsGroup, DesktopHeader } from "../../components";
+import FormContainer from "../FormContainer/FormContainer";
+import { Header, DesktopHeader, MobileHeader } from "../../components";
 
 import { NotesContext } from "../../context/NotesContext";
 import AppContext from "../../context/AppContext";
-
-import FormContainer from "../FormContainer/FormContainer";
-import { MobileHeader } from "../../components";
 
 type FormType = "create" | "update" | null;
 
